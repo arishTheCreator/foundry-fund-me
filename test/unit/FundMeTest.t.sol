@@ -2,8 +2,8 @@
 pragma solidity ^0.8.18;
 
 import {Test, console} from "forge-std/Test.sol";
-import {FundMe} from "../src/FundMe.sol";
-import {DeployFundMe} from "../script/DeployFundMe.s.sol";
+import {FundMe} from "src/FundMe.sol";
+import {DeployFundMe} from "script/DeployFundMe.s.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
@@ -52,7 +52,7 @@ contract FundMeTest is Test {
         assertEq(amountFunded, SEND_VALUE);
     }
 
-    function testAddFundersToArrayOfFunders() public {
+    function testAddFunderToArrayOfFunders() public {
         vm.prank(USER);
         fundMe.fund{value: SEND_VALUE}();
 
@@ -63,7 +63,6 @@ contract FundMeTest is Test {
     modifier funded() {
         vm.prank(USER);
         fundMe.fund{value: SEND_VALUE}();
-        address funder = fundMe.getFunder(0);
         _;
     }
 
